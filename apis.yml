@@ -1,0 +1,87 @@
+aid: paysend
+url: https://raw.githubusercontent.com/api-evangelist/paysend/refs/heads/main/apis.yml
+name: Paysend
+kind: company
+description: >-
+  Paysend is a London-headquartered global fintech, founded in 2017, building a
+  cross-border digital payments network that moves money to bank accounts,
+  cards, and wallets across 170+ countries in 40+ currencies for more than 11
+  million consumers and a growing base of enterprise clients. Alongside its
+  consumer money-transfer app, Paysend operates Paysend Enterprise, a
+  business-facing payments platform whose developer surface is a single Payout
+  API: one integration disburses funds worldwide to cards and accounts, with FX
+  rate lookups, bank and card tokenization utilities, partner statements, and
+  balance queries. The API is a partner-provisioned, enterprise integration
+  (United Kingdom home market) rather than a fully public self-serve product —
+  authentication is API key plus HMAC digital signature (X-OPP-Signature),
+  requests are idempotent via a request id and date, and payout status is
+  delivered through configurable webhook notifications. Paysend documents this
+  surface openly on a Docusaurus developer portal with a sandbox mock service,
+  but does not publish a downloadable OpenAPI/Swagger definition or a public
+  base URL.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Payments
+- United Kingdom
+- Cross-Border
+- Money Transfer
+- Payouts
+- Payment Processing
+- FX
+- Remittance
+- Fintech
+created: '2026-07-24'
+modified: '2026-07-24'
+specificationVersion: '0.19'
+apis:
+- aid: paysend:paysend-enterprise-payout-api
+  name: Paysend Enterprise Payout API
+  description: >-
+    Paysend Enterprise's single Payout API disburses funds worldwide to cards
+    and bank accounts through the Paysend payments network. A multi-task POST
+    /processing endpoint carries operations including pay.toCard, pay.toAccount,
+    fx.rateGet / fx.rateGet.p2a, bank.get / bank.search, card.createToken /
+    card.infoGet, partner.statementGet, getBalance, and task.statusGet, with a
+    companion GET /processing/status/ for status retrieval. Authentication is
+    API key plus HMAC digital signature (X-OPP-Signature, SHA-256/512); requests
+    are made idempotent via header.request.id and header.request.date, and
+    payment outcomes are pushed to configurable webhook notification URLs. A
+    sandbox mock service is provided. No downloadable OpenAPI specification or
+    public base URL is published; the surface is partner-provisioned.
+  humanURL: https://developer.paysend.com/product-overview/
+  tags:
+  - Payouts
+  - Cross-Border
+  - FX
+  - Payments
+  properties:
+  - type: Documentation
+    url: https://developer.paysend.com/product-overview/
+  - type: APIReference
+    url: https://developer.paysend.com/endpoints/get-processing-status/
+  - type: Authentication
+    url: https://developer.paysend.com/authentication-and-idempotency/
+  - type: Webhooks
+    url: https://developer.paysend.com/webhook-notification-service/
+common:
+- type: Website
+  url: https://paysend.com/
+- type: DeveloperPortal
+  url: https://developer.paysend.com/
+- type: Documentation
+  url: https://developer.paysend.com/product-overview/
+- type: APIReference
+  url: https://developer.paysend.com/endpoints/get-processing-status/
+- type: Authentication
+  url: https://developer.paysend.com/authentication-and-idempotency/
+- type: GitHubOrganization
+  url: https://github.com/paysend
+- type: Blog
+  url: https://paysend.com/blog
+- type: PrivacyPolicy
+  url: https://cloud.paysend.com/web/docs/Global_Privacy_Policy_Paysend.pdf
+- type: Product
+  url: https://paysend.com/enterprise
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

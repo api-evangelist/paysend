@@ -1,0 +1,119 @@
+aid: paysend
+name: Paysend
+review:
+  question: >-
+    Does Paysend publish a real public developer portal and a downloadable
+    OpenAPI definition for its payments API?
+  answer: partial
+  date: '2026-07-24'
+  reviewer: API Evangelist
+findings:
+  summary: >-
+    Paysend, a London-headquartered (United Kingdom home market) cross-border
+    payments fintech founded in 2017, runs a genuine, openly readable developer
+    portal at https://developer.paysend.com/ (HTTP 200, Docusaurus v3.6.3) for
+    Paysend Enterprise. The documented surface is a single Payout API: a
+    multi-task POST /processing endpoint (pay.toCard, pay.toAccount, fx.rateGet,
+    fx.rateGet.p2a, bank.get, bank.search, card.createToken, card.infoGet,
+    partner.statementGet, getBalance, task.statusGet) plus GET
+    /processing/status/. Authentication is API key + HMAC digital signature
+    carried in the X-OPP-Signature header (SHA-256 or SHA-512 over
+    {RequestBody}{InboundAPIKey}), with idempotency via header.request.id and
+    header.request.date. Payment outcomes are delivered through configurable
+    webhook notification URLs (also X-OPP-Signature verified). A sandbox mock
+    service is documented. However, NO downloadable OpenAPI/Swagger definition
+    is exposed — the Docusaurus reference renders endpoint pages but every
+    non-page path (/openapi.json, /swagger.json, /robots.txt, /img/logo.svg) is
+    blocked by CloudFront with HTTP 403, and no "Download OpenAPI" link is
+    published. No public base URL / API host is documented; the API is
+    partner-provisioned (enterprise onboarding), not fully public self-serve. No
+    public Postman collection, GraphQL, or gRPC surface was found. This is a
+    money-movement payout rail, not a scheme/ISO 20022 clearing operator, so no
+    scheme-message or ISO 20022 posture applies. Zero OpenAPI specs harvested
+    verbatim.
+  homeMarket: United Kingdom
+  developerPortal:
+    url: https://developer.paysend.com/
+    status: 200
+    platform: Docusaurus v3.6.3
+    confirmed: true
+  downloadableSpecs:
+    count: 0
+    note: >-
+      No OpenAPI/Swagger file is downloadable. Candidate spec paths
+      (/openapi.json, /openapi.yaml, /swagger.json, /spec.json,
+      /api-reference/openapi.json, /api-overview/openapi.json,
+      /assets/openapi.json) all returned HTTP 403 (CloudFront) as of 2026-07-24;
+      the portal is a Docusaurus reference with no published spec download.
+  authModel:
+    scheme: API key + HMAC digital signature
+    header: X-OPP-Signature
+    algorithm: SHA-256 / SHA-512 over {RequestBody}{InboundAPIKey}
+    idempotency: header.request.id + header.request.date (ISO 8601)
+    oauth: false
+    mtls: false
+  webhooks:
+    present: true
+    note: >-
+      Configurable backward notification URLs per request (one or more), GET or
+      POST, carrying globalId; verified via X-OPP-Signature. No AsyncAPI
+      document is published.
+  postman:
+    present: false
+  transports:
+  - protocol: REST
+    scheme: https
+    documented: true
+    note: >-
+      POST /processing (multi-task) and GET /processing/status/ documented on
+      the developer portal. No public base URL / host is published; provisioned
+      to enterprise partners.
+  - protocol: Webhook
+    scheme: https
+    documented: true
+    note: Partner-configured notification callbacks, X-OPP-Signature verified.
+  - protocol: GraphQL
+    documented: false
+  - protocol: gRPC
+    documented: false
+sources:
+- url: https://developer.paysend.com/
+  type: DeveloperPortal
+  status: 200
+  note: Docusaurus portal home — Paysend Enterprise / Payout API.
+- url: https://developer.paysend.com/product-overview/
+  type: Documentation
+  status: 200
+  note: Payout API across 168+ countries and 48+ currencies; cards and accounts.
+- url: https://developer.paysend.com/api-overview/
+  type: Documentation
+  status: 200
+  note: POST /processing multi-task model + GET /processing/status/.
+- url: https://developer.paysend.com/authentication-and-idempotency/
+  type: Authentication
+  status: 200
+  note: API key + HMAC signature (X-OPP-Signature); idempotency via request id/date.
+- url: https://developer.paysend.com/webhook-notification-service/
+  type: Webhooks
+  status: 200
+  note: Configurable notification URLs, X-OPP-Signature verification.
+- url: https://developer.paysend.com/api-overview/api-sandbox-mock-service/
+  type: Documentation
+  status: 200
+  note: Sandbox mock service for testing without real transactions.
+- url: https://github.com/paysend
+  type: GitHubOrganization
+  status: 200
+- url: https://paysend.com/enterprise
+  type: Product
+  status: 200
+actions:
+  openapiHarvested: false
+  specsCount: 0
+  apisYmlUpdated: true
+  reason: >-
+    Identity and the real developer/API surface were captured from the live
+    Docusaurus portal, but no OpenAPI/Swagger definition is downloadable and no
+    public base URL is published, so no spec was saved verbatim. The single
+    Payout API is listed with documentation, reference, authentication, and
+    webhook pointers only.
