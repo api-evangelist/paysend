@@ -1,0 +1,33 @@
+# Paysend
+
+> Paysend is a London-headquartered global fintech (founded 2017) running a cross-border digital payments network that moves money to bank accounts, cards, and wallets across 170+ countries in 40+ currencies. Paysend Enterprise exposes a single Payout API: one integration disburses funds worldwide to cards and accounts, with FX lookups, bank/card tokenization utilities, partner statements, balance queries, and webhook notifications. The surface is partner-provisioned (enterprise onboarding); no downloadable OpenAPI or public base URL is published.
+
+## API
+- [Paysend Enterprise Payout API — Product overview](https://developer.paysend.com/product-overview/): One API for global payout coverage to cards and accounts.
+- [API overview](https://developer.paysend.com/api-overview/): Multi-task POST /processing model plus GET /processing/status/.
+- [Endpoints](https://developer.paysend.com/category/endpoints): pay.toCard, pay.toAccount, fx.rateGet, fx.rateGet.p2a, bank.get, bank.search, card.createToken, card.infoGet, partner.statementGet, getBalance, task.statusGet.
+
+## Authentication
+- [Authentication & idempotency](https://developer.paysend.com/authentication-and-idempotency/): API key + HMAC signature in X-OPP-Signature (SHA-256/512 over {RequestBody}{InboundAPIKey}); idempotency via header.request.id + header.request.date.
+
+## Events
+- [Webhook notification service](https://developer.paysend.com/webhook-notification-service/): Configurable callback URLs delivering TransactionStatusUpdate (invoiceId, transactionId, status, statusDateTime, errorCode, errorDescription).
+
+## Statuses & errors
+- [Statuses reference](https://developer.paysend.com/statuses/): Request statuses (Accepted/InProgress/Finished), task statuses (Accepted/InProgress/Success/Error), task result codes 0/1/2/3/5.
+
+## Testing
+- [Sandbox mock service](https://developer.paysend.com/api-overview/api-sandbox-mock-service/): Static predefined responses; error simulation by setting a function's trigger field to the target error code.
+
+## Repo artifacts
+- [Authentication profile](https://raw.githubusercontent.com/api-evangelist/paysend/refs/heads/main/authentication/paysend-authentication.yml)
+- [API conventions](https://raw.githubusercontent.com/api-evangelist/paysend/refs/heads/main/conventions/paysend-conventions.yml)
+- [Webhooks catalog](https://raw.githubusercontent.com/api-evangelist/paysend/refs/heads/main/asyncapi/paysend-webhooks.yml)
+- [Error / result codes](https://raw.githubusercontent.com/api-evangelist/paysend/refs/heads/main/errors/paysend-error-codes.yml)
+- [Sandbox](https://raw.githubusercontent.com/api-evangelist/paysend/refs/heads/main/sandbox/paysend-sandbox.yml)
+- [Conformance & compliance](https://raw.githubusercontent.com/api-evangelist/paysend/refs/heads/main/conformance/paysend-conformance.yml)
+- [MCP candidate tools](https://raw.githubusercontent.com/api-evangelist/paysend/refs/heads/main/mcp/paysend-mcp.yml)
+
+## Company
+- [Paysend Enterprise](https://paysend.com/enterprise): One API, global payout coverage.
+- [Compliance & security](https://paysend.com/en/blog/paysend-compliance-security-digital-money-transfers): FCA / FinCEN / Central Bank of Ireland; PCI DSS, PSD2, GDPR.

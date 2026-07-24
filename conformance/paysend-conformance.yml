@@ -1,0 +1,58 @@
+generated: '2026-07-24'
+method: searched
+source:
+  - https://developer.paysend.com/authentication-and-idempotency/
+  - https://paysend.com/en/blog/paysend-compliance-security-digital-money-transfers
+  - https://paysend.com/en-us/license/us
+note: >-
+  Standards/compliance posture for the Paysend Enterprise Payout API. Security
+  conformance (idempotency, HMAC signing, webhooks) is derived from the
+  developer portal; the regulatory/compliance program is sourced from Paysend's
+  published compliance and licensing pages. No OpenAPI is published, so
+  spec-derived conformance is limited.
+standards:
+  - id: idempotency
+    conforms: true
+    evidence: header.request.id + header.request.date idempotency contract documented on the portal.
+  - id: hmac-request-signing
+    conforms: true
+    evidence: X-OPP-Signature HMAC signature (SHA-256/512) over {RequestBody}{InboundAPIKey}.
+  - id: webhooks
+    conforms: true
+    evidence: Configurable notification callbacks (TransactionStatusUpdate).
+  - id: oauth2
+    conforms: false
+    evidence: No OAuth2 documented; auth is API key + HMAC signature.
+  - id: openid-connect
+    conforms: false
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Errors use task result codes + errorCode/errorDescription, not application/problem+json.
+  - id: json-api
+    conforms: false
+  - id: pci-dss
+    conforms: true
+    evidence: Paysend states full PCI DSS compliance for card processing (published compliance page).
+  - id: psd2
+    conforms: true
+    evidence: EU operations governed under PSD2 (Central Bank of Ireland); published compliance page.
+  - id: gdpr
+    conforms: true
+    evidence: Data protection under GDPR; published compliance/privacy documentation.
+compliance_program:
+  published: true
+  page: https://paysend.com/en/blog/paysend-compliance-security-digital-money-transfers
+  licenses_page: https://paysend.com/en-us/license/us
+  regulators:
+    - Financial Conduct Authority (FCA) — United Kingdom
+    - FinCEN — United States (Paysend US LLC, NMLS ID 2048617, licensed money transmitter)
+    - Central Bank of Ireland — European Union
+  certifications:
+    - PCI DSS
+    - Visa
+    - Mastercard
+    - China UnionPay
+  frameworks:
+    - PSD2
+    - GDPR
+    - AML

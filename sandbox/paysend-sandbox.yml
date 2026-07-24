@@ -1,0 +1,40 @@
+generated: '2026-07-24'
+method: searched
+source: https://developer.paysend.com/api-overview/api-sandbox-mock-service/
+docs: https://developer.paysend.com/api-overview/api-sandbox-mock-service/
+note: >-
+  Paysend Enterprise provides a sandbox mock service that returns consistent,
+  static responses and does not perform actual payment processing. No sandbox
+  base URL, test API keys, or test card/account numbers are published on the
+  portal (the surface is partner-provisioned); credentials are issued during
+  enterprise onboarding. Only the published static values and the error-trigger
+  mechanism are captured below verbatim.
+separation:
+  model: mock service
+  behavior: >-
+    Sandbox returns static, predefined responses to simplify integration
+    testing and does not run real business logic or real-time payment
+    processing. Production applies actual business logic and real-time
+    processing.
+static_values:
+  traceId: '8878b45bb948490a8971c7ac130e0461'
+  paymentId: '8878b45b-b948-490a-8971-c7ac130e0461'
+  note: These are static, predefined values in the sandbox environment.
+error_simulation:
+  mechanism: >-
+    To trigger a specific error response, set the function's designated trigger
+    field to the target error code. Example: pay.toCard with "amount": 3002
+    returns error code 3002.
+  trigger_fields:
+    pay.toCard: amount
+    pay.toAccount: transferAmount
+    fx.rateGet: amountIn
+    fx.rateGet.p2a: payoutAmount
+    card.createToken: cardNumber
+    card.infoGet: pan
+    partner.statementGet: currency
+    getBalance: currency
+    task.statusGet: identifier or invoiceId
+test_credentials:
+  published: false
+  note: No test API keys or test PANs are published; provisioned during onboarding.

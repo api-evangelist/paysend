@@ -1,0 +1,73 @@
+generated: '2026-07-24'
+method: searched
+source: https://developer.paysend.com/authentication-and-idempotency/
+docs:
+  - https://developer.paysend.com/api-overview/
+  - https://developer.paysend.com/authentication-and-idempotency/
+  - https://developer.paysend.com/webhook-notification-service/
+  - https://developer.paysend.com/statuses/
+note: >-
+  Cross-cutting request/response semantics for the Paysend Enterprise Payout API,
+  captured from the developer portal. The API is a single multi-task JSON
+  endpoint rather than a resource-oriented REST surface.
+authentication:
+  style: api-key + HMAC signature
+  header: X-OPP-Signature
+  detail: See authentication/paysend-authentication.yml
+request_model:
+  style: multi-task envelope
+  endpoint: POST /processing
+  description: >-
+    A single POST /processing endpoint carries one or more tasks in the request
+    body. Task types include pay.toCard, pay.toAccount, fx.rateGet,
+    fx.rateGet.p2a, bank.get, bank.search, card.createToken, card.infoGet,
+    partner.statementGet, getBalance, and task.statusGet. A companion
+    GET /processing/status/ retrieves status.
+  envelope:
+    header:
+      request:
+        id: unique idempotency key (string)
+        date: request timestamp (ISO 8601)
+idempotency:
+  supported: true
+  scope: per request
+  fields: [header.request.id, header.request.date]
+  detail: >-
+    Idempotency is enforced by the combination of header.request.id (a unique
+    idempotency key) and header.request.date (the request timestamp). Replaying
+    a request with the same id/date pair does not re-execute the operation.
+  source: https://developer.paysend.com/authentication-and-idempotency/
+status_polling:
+  style: asynchronous
+  endpoint: GET /processing/status/
+  task_op: task.statusGet
+  request_statuses: [Accepted, InProgress, Finished]
+  task_statuses: [Accepted, InProgress, Success, Error]
+  task_result_codes:
+    '0': Task is in Accepted status
+    '1': Task is in InProgress status
+    '2': Task is in Success status
+    '3': Task is in Error status
+    '5': Task is waiting on manual action but is in Error status (e.g. sanctions review)
+  note: >-
+    A Finished request status does not guarantee successful task completion;
+    inspect per-task status and result codes.
+tracing:
+  identifiers:
+    - globalId (transaction identifier used for status checks and webhook payloads)
+    - traceId (returned in responses; static in sandbox)
+    - paymentId (returned in responses; static in sandbox)
+webhooks:
+  supported: true
+  detail: See asyncapi/paysend-webhooks.yml
+versioning:
+  scheme: unknown
+  note: No public versioning or deprecation policy is documented; the surface is partner-provisioned.
+error_envelope:
+  style: task result code + status
+  detail: >-
+    Errors surface as a task Error status (task result code 3, or 5 for manual
+    review) and, in webhook notifications, via errorCode and errorDescription
+    fields. See errors/paysend-error-codes.yml.
+rate_limiting:
+  documented: false

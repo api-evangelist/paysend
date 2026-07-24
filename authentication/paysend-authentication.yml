@@ -1,0 +1,50 @@
+generated: '2026-07-24'
+method: searched
+source: https://developer.paysend.com/authentication-and-idempotency/
+docs: https://developer.paysend.com/authentication-and-idempotency/
+note: >-
+  Derived from the Paysend Enterprise developer portal auth documentation rather
+  than an OpenAPI securitySchemes block (no downloadable spec is published). The
+  Payout API authenticates every request with an inbound API key plus an HMAC
+  digital signature carried in the X-OPP-Signature header. No OAuth2, OpenID
+  Connect, or mutual TLS is documented.
+summary:
+  types: [apiKey, hmac-signature]
+  api_key_in: [provisioned]
+  oauth2_flows: []
+schemes:
+  - name: InboundAPIKey
+    type: apiKey
+    description: >-
+      A partner-provisioned inbound API key issued by Paysend during enterprise
+      onboarding. Not passed as a bearer token; it is a shared secret used both
+      to identify the partner and as an input to the request signature.
+    provisioning: enterprise onboarding (partner-provisioned)
+    sources: [docs]
+  - name: X-OPP-Signature
+    type: http
+    scheme: hmac-signature
+    in: header
+    header: X-OPP-Signature
+    description: >-
+      HMAC-style request signature. For API calls the source string is the
+      concatenation {RequestBody}{InboundAPIKey}; for status checks the source
+      string is {globalId}{InboundAPIKey}. The agreed hash algorithm is applied
+      to the source string and the resulting hash is hex-encoded into the header.
+    algorithms: [SHA-256, SHA-512]
+    signature_string_api: '{RequestBody}{InboundAPIKey}'
+    signature_string_status: '{globalId}{InboundAPIKey}'
+    encoding: hexadecimal
+    sources: [docs]
+idempotency:
+  supported: true
+  mechanism: >-
+    Requests are made idempotent via two required header fields inside the JSON
+    request envelope: header.request.id (a unique idempotency key per request)
+    and header.request.date (the request timestamp, ISO 8601). The combination
+    of the two guarantees an operation is not performed more than once.
+  fields:
+    - name: header.request.id
+      description: Unique idempotency key for each API request.
+    - name: header.request.date
+      description: Request timestamp (ISO 8601, e.g. 2024-08-15T14:30:00Z).

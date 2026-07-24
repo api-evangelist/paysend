@@ -1,0 +1,65 @@
+generated: '2026-07-24'
+method: searched
+source: https://developer.paysend.com/statuses/
+docs:
+  - https://developer.paysend.com/statuses/
+  - https://developer.paysend.com/api-overview/api-sandbox-mock-service/
+format: task-result-code
+note: >-
+  Paysend Enterprise does not publish an RFC 9457 problem+json catalog or a
+  scheme-style decline-code table. Failures are conveyed as task statuses and
+  numeric task result codes, and (in webhook callbacks) via errorCode /
+  errorDescription. Captured from the /statuses/ reference and the sandbox
+  mock-service error-simulation model.
+envelope:
+  api_surface:
+    fields: [status, resultCode]
+    note: Per-task status plus a numeric task result code on GET /processing/status/.
+  webhook_surface:
+    fields: [status, errorCode, errorDescription]
+    note: Expanded TransactionStatusUpdate callbacks carry errorCode + errorDescription.
+request_statuses:
+  - status: Accepted
+    meaning: Request passed all incoming checks (partner, signature, security, finance).
+  - status: InProgress
+    meaning: The processing block is working on the request.
+  - status: Finished
+    meaning: Request complete; no tasks remain. Does NOT guarantee task success.
+task_statuses:
+  - status: Accepted
+    meaning: Task received Accepted status alongside the request, before processing.
+  - status: InProgress
+    meaning: The processing block started processing the task.
+  - status: Success
+    meaning: The task aim was achieved and all processing actions succeeded.
+  - status: Error
+    meaning: The task did not achieve its aim; the processing mechanism errored.
+task_result_codes:
+  - code: 0
+    meaning: Task is in Accepted status.
+  - code: 1
+    meaning: Task is in InProgress status.
+  - code: 2
+    meaning: Task is in Success status.
+  - code: 3
+    meaning: Task is in Error status.
+  - code: 5
+    meaning: >-
+      Task is waiting on manual action but is in Error status (e.g. sanctions
+      list matches requiring manual review).
+sandbox_error_simulation:
+  mechanism: >-
+    In the sandbox mock service, specific error codes are triggered by setting a
+    designated trigger field to the desired error code value. Example: pay.toCard
+    with "amount": 3002 returns error code 3002.
+  trigger_fields:
+    pay.toCard: amount
+    pay.toAccount: transferAmount
+    fx.rateGet: amountIn
+    fx.rateGet.p2a: payoutAmount
+    card.createToken: cardNumber
+    card.infoGet: pan
+    partner.statementGet: currency
+    getBalance: currency
+    task.statusGet: identifier or invoiceId
+  source: https://developer.paysend.com/api-overview/api-sandbox-mock-service/

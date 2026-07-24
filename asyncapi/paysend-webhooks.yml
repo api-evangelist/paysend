@@ -1,0 +1,46 @@
+generated: '2026-07-24'
+method: searched
+source: https://developer.paysend.com/webhook-notification-service/
+spec_type: Webhooks
+note: >-
+  Paysend Enterprise delivers payout outcomes through configurable webhook
+  notification (backward notification) callbacks rather than a published AsyncAPI
+  document. Notification URLs are supplied in the request; Paysend calls back
+  with the transaction outcome. No AsyncAPI/asyncapi.yaml is published.
+transport: https
+configuration:
+  style: per-request callback URL
+  fields:
+    uri: The notification URL to call back (e.g. "https://example.com").
+    method: HTTP method for the callback (e.g. "get").
+  note: >-
+    Notification endpoints are configured on the request via a uri + method
+    pair. Paysend calls the endpoint when the transaction status changes.
+payload_formats:
+  basic:
+    description: Minimal callback carrying only the transaction identifier.
+    example_field: transactionId (UUID, e.g. "B8719542-fav4-4902-ab2c-11de595ace30")
+  expanded:
+    description: Full status-update callback.
+    fields:
+      - webhookType   # e.g. "TransactionStatusUpdate"
+      - invoiceId
+      - transactionId
+      - status        # e.g. "Completed"
+      - statusDateTime
+      - errorCode
+      - errorDescription
+events:
+  - type: TransactionStatusUpdate
+    description: Sent when a payout transaction changes status.
+    status_values_documented: [Completed]
+    note: >-
+      The webhook example documents the "Completed" status; the full status
+      vocabulary is described under the /statuses/ reference
+      (request/task statuses and result codes). See conventions/ and errors/.
+verification:
+  note: >-
+    The developer portal's authentication guidance describes X-OPP-Signature
+    verification for the API surface; the webhook page itself does not restate a
+    signature mechanism. Confirm callback verification details with Paysend
+    during onboarding.

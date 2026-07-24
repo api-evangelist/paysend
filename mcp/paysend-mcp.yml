@@ -1,0 +1,50 @@
+generated: '2026-07-24'
+method: derived
+status: candidate
+source: https://developer.paysend.com/api-overview/
+note: >-
+  No official hosted/remote MCP server is published by Paysend. This is a
+  CANDIDATE tool list derived from the documented tasks of the single multi-task
+  POST /processing endpoint plus GET /processing/status/. Because Paysend
+  publishes no downloadable OpenAPI, each tool's real input schema must be
+  confirmed against the enterprise integration docs / partner onboarding — the
+  task names below are documented verbatim, but parameter schemas are not
+  machine-readable.
+server:
+  name: paysend
+  transport: http
+  url: null   # no published MCP server
+tools:
+  - name: pay_to_card
+    description: Disburse a payout to a card.
+    source_task: pay.toCard
+  - name: pay_to_account
+    description: Disburse a payout to a bank account.
+    source_task: pay.toAccount
+  - name: fx_rate_get
+    description: Look up an FX rate.
+    source_task: fx.rateGet
+  - name: fx_rate_get_p2a
+    description: Look up an FX rate for pay-to-account.
+    source_task: fx.rateGet.p2a
+  - name: bank_get
+    description: Retrieve bank details.
+    source_task: bank.get
+  - name: bank_search
+    description: Search for a bank.
+    source_task: bank.search
+  - name: card_create_token
+    description: Tokenize a card.
+    source_task: card.createToken
+  - name: card_info_get
+    description: Retrieve card information.
+    source_task: card.infoGet
+  - name: partner_statement_get
+    description: Retrieve a partner statement.
+    source_task: partner.statementGet
+  - name: get_balance
+    description: Query the partner balance.
+    source_task: getBalance
+  - name: task_status_get
+    description: Retrieve the status of a task (also GET /processing/status/).
+    source_task: task.statusGet

@@ -64,6 +64,8 @@ apis:
   - type: Webhooks
     url: https://developer.paysend.com/webhook-notification-service/
 common:
+- type: DomainSecurity
+  url: security/paysend-domain-security.yml
 - type: Website
   url: https://paysend.com/
 - type: DeveloperPortal
@@ -82,6 +84,28 @@ common:
   url: https://cloud.paysend.com/web/docs/Global_Privacy_Policy_Paysend.pdf
 - type: Product
   url: https://paysend.com/enterprise
+- type: GettingStarted
+  url: https://developer.paysend.com/
+- type: Support
+  url: https://help.paysend.com/hc/en-us
+- type: Compliance
+  url: https://paysend.com/en/blog/paysend-compliance-security-digital-money-transfers
+- type: Conventions
+  url: conventions/paysend-conventions.yml
+- type: Idempotency
+  url: conventions/paysend-conventions.yml
+- type: ErrorCatalog
+  url: errors/paysend-error-codes.yml
+- type: Sandbox
+  url: sandbox/paysend-sandbox.yml
+- type: Webhooks
+  url: asyncapi/paysend-webhooks.yml
+- type: Conformance
+  url: conformance/paysend-conformance.yml
+- type: MCPServer
+  url: mcp/paysend-mcp.yml
+- type: LLMsTxt
+  url: llms/paysend-llms.txt
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
