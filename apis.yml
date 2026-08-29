@@ -19,6 +19,17 @@ description: >-
   surface openly on a Docusaurus developer portal with a sandbox mock service,
   but does not publish a downloadable OpenAPI/Swagger definition or a public
   base URL.
+deliveryModel:
+  model: unknown
+  open_source: false
+  commercial: false
+  callable_host: false
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - none
+  generated: '2026-08-28'
+  method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
 - Payments
