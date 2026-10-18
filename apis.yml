@@ -52,7 +52,7 @@ tags:
 - Money Transfer
 - Payouts
 - Payment Processing
-- FX
+- Foreign Exchange
 - Remittances
 - Fintech
 - Cross-Border Payments
@@ -87,6 +87,11 @@ apis:
     public base URL is published; the surface is partner-provisioned.
   humanURL: https://developer.paysend.com/product-overview/
   tags:
+  - Payouts
+  - Cross-Border
+  - Foreign Exchange
+  - Payments
+  tags_raw:
   - Payouts
   - Cross-Border
   - FX
