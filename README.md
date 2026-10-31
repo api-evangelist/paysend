@@ -1,4 +1,4 @@
-# Paysend (paysend)
+# Paysend
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,69 +64,104 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Paysend is a London-headquartered global fintech, founded in 2017, building a cross-border digital payments network that moves money to bank accounts, cards, and wallets across 170+ countries in 40+ currencies for more than 11 million consumers and a growing base of enterprise clients. Alongside its consumer money-transfer app, Paysend operates Paysend Enterprise, whose developer surface is a single Payout API: one integration disburses funds worldwide to cards and accounts, with FX rate lookups, bank and card tokenization utilities, partner statements, and balance queries.
+Paysend is a London-headquartered global fintech, founded in 2017, building a cross-border digital payments network that moves money to bank accounts, cards, and wallets across 170+ countries in 40+ currencies for more than 11 million consumers and a growing base of enterprise clients. Alongside its consumer money-transfer app, Paysend operates Paysend Enterprise, a business-facing payments platform whose developer surface is a single Payout API: one integration disburses funds worldwide to cards and accounts, with FX rate lookups, bank and card tokenization utilities, partner statements, and balance queries. The API is a partner-provisioned, enterprise integration (United Kingdom home market) rather than a fully public self-serve product — authentication is API key plus HMAC digital signature (X-OPP-Signature), requests are idempotent via a request id and date, and payout status is delivered through configurable webhook notifications. Paysend documents this surface openly on a Docusaurus developer portal with a sandbox mock service, but does not publish a downloadable OpenAPI/Swagger definition or a public base URL.
 
-The API is a partner-provisioned enterprise integration (United Kingdom home market) rather than a fully public self-serve product. Authentication is API key plus HMAC digital signature (`X-OPP-Signature`), requests are idempotent via a request id and date, and payout status is delivered through configurable webhook notifications. Paysend documents this surface openly on a Docusaurus developer portal with a sandbox mock service, but does not publish a downloadable OpenAPI/Swagger definition or a public base URL.
+**Areas:** Payments · United Kingdom · Cross-Border · Money Transfer · Payouts · Payment Processing · Foreign Exchange · Remittances · Fintech · Cross-Border Payments
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/paysend/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/paysend/refs/heads/main/apis.yml)
+## Paysend on APIs.io
 
-## Tags
+Everything profiled for Paysend is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/paysend/](https://apis.io/providers/paysend/)** — or go straight to one of the APIs or properties below.
 
-- Payments
-- United Kingdom
-- Cross-Border
-- Money Transfer
-- Payouts
-- Payment Processing
-- FX
-- Remittance
-- Fintech
+### APIs (1)
 
-## Timestamps
+- [Paysend Enterprise Payout API](https://apis.io/apis/paysend/paysend-enterprise-payout-api/) — Paysend Enterprise's single Payout API disburses funds worldwide to cards and bank accounts through the Paysend payments network. A multi-task POST…
 
-- **Created:** 2026-07-24
-- **Modified:** 2026-07-24
+### Published properties
 
-## APIs
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-### Paysend Enterprise Payout API
+#### AsyncAPI (1)
 
-Paysend Enterprise's single Payout API disburses funds worldwide to cards and bank accounts through the Paysend payments network. A multi-task `POST /processing` endpoint carries operations including `pay.toCard`, `pay.toAccount`, `fx.rateGet` / `fx.rateGet.p2a`, `bank.get` / `bank.search`, `card.createToken` / `card.infoGet`, `partner.statementGet`, `getBalance`, and `task.statusGet`, with a companion `GET /processing/status/` for status retrieval. A sandbox mock service is provided.
+Event-driven and webhook contracts.
 
-- **Human URL:** [https://developer.paysend.com/product-overview/](https://developer.paysend.com/product-overview/)
-- **Auth:** API key + HMAC digital signature (`X-OPP-Signature`, SHA-256/512); idempotency via `header.request.id` + `header.request.date`.
+- [Paysend Webhooks](https://apis.io/asyncapis/paysend/paysend-webhooks/)
 
-#### Tags
+#### MCP servers (1)
 
-- Payouts
-- Cross-Border
-- FX
-- Payments
+Model Context Protocol servers that expose the API to agents.
 
-#### Properties
+- [paysend](https://apis.io/servers/paysend/paysend/)
 
-- [Documentation](https://developer.paysend.com/product-overview/)
-- [API Reference](https://developer.paysend.com/endpoints/get-processing-status/)
-- [Authentication](https://developer.paysend.com/authentication-and-idempotency/)
-- [Webhooks](https://developer.paysend.com/webhook-notification-service/)
+#### Security (2)
 
-## Common Properties
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Paysend Authentication](https://apis.io/security/paysend/paysend-authentication/)
+- [Paysend Domain Security](https://apis.io/security/paysend/paysend-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://paysend.com/)
-- [Developer Portal](https://developer.paysend.com/)
 - [Documentation](https://developer.paysend.com/product-overview/)
-- [API Reference](https://developer.paysend.com/endpoints/get-processing-status/)
-- [Authentication](https://developer.paysend.com/authentication-and-idempotency/)
-- [GitHub Organization](https://github.com/paysend)
+- [Getting started](https://developer.paysend.com/)
+- [API reference](https://developer.paysend.com/endpoints/get-processing-status/)
+- [Support](https://help.paysend.com/hc/en-us)
 - [Blog](https://paysend.com/blog)
-- [Privacy Policy](https://cloud.paysend.com/web/docs/Global_Privacy_Policy_Paysend.pdf)
-- [Product](https://paysend.com/enterprise)
+- [Compliance](https://paysend.com/en/blog/paysend-compliance-security-digital-money-transfers)
+- [Privacy policy](https://cloud.paysend.com/web/docs/Global_Privacy_Policy_Paysend.pdf)
+- [GitHub](https://github.com/paysend)
 
-## Review
+## API Evangelist rating
 
-No downloadable OpenAPI/Swagger definition is exposed and no public base URL is documented — the Payout API is partner-provisioned. See [review.yml](review.yml) for the full reviewer findings.
+**Kin Score 37.9** — thin · rubric 0.24.0 · scored 2026-10-17
 
-## Maintainers
+| Facet | Score |
+|---|---|
+| Discoverability | 64.3 |
+| Contract quality | 39.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 64.3 |
+| Access clarity | 18.4 |
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Agent readiness 25.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | documented (partial credit) |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | yes |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 30.4** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/paysend/](https://apis.io/providers/paysend/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Paysend: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/paysend/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
